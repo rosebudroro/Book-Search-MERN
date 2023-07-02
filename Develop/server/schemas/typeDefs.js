@@ -2,31 +2,48 @@ const { gql } = require('apollo-server-express');
 const { Book , User } = require('./')
 
 const typeDefs = gql`
+  type Query {
+    me: User
+    users: [User]
+    user(username: String!): User
+  }
 
-const resolvers = {
-  Query: {
-    tech: async () => {
-      return Tech.find({});
-    },
-    matchups: async (parent, { _id }) => {
-      const params = _id ? { _id } : {};
-      return Matchup.find(params);
-    },
-  },
-  Mutation: {
-    createMatchup: async (parent, args) => {
-      const matchup = await Matchup.create(args);
-      return matchup;
-    },
-    createVote: async (parent, { _id, techNum }) => {
-      const vote = await Matchup.findOneAndUpdate(
-        { _id },
-        { $inc: { [`tech${techNum}_votes`]: 1 } },
-        { new: true }
-      );
-      return vote;
-    },
-  },
-};
+  type User {
+    _id: ID
+    username: String
+    email: String
+    savedBooks: [Book]
+  }
 
-module.exports = resolvers;
+  type Book {
+    bookID: String
+    authors: [String]
+    description: String
+    image: String
+    link: String
+    title: String
+  }
+
+  input: bookInput {
+    bookID: String
+    authors: [String]
+    description: String
+    image: String
+    link: String
+    title: String
+  }
+
+  type: Auth {
+    token: ID
+    user: User
+  },
+
+  type Mutation {
+    addUser(username: String!, email: String!, password: String!): Auth
+    login(email: String!, password: String!): Auth
+    saveBook(bookInput: bookInput): User
+    removeBook(bookInput: String!): User
+  }
+`;
+
+module.exports = typeDefs;
