@@ -22,7 +22,7 @@ To complete this project, I did the following:
 - [Installation](#installation)
 - [Usage](#usage)
 - [Credits](#credits)
-- [License] (#license)
+- [License](#license)
 
 
 ## Installation
@@ -45,11 +45,11 @@ npm start develop
 
 Application screenshot:
 
-![MERN Book Search Engine]'(Book-Search-MERN/Develop/client/public/mern.png)
+![MERN Book Search Engine](./Develop/client/public/mern.png)
 
 ## Credits
 
-N/A
+Roxanna Osorio
 
 ## License
 
